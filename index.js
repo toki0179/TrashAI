@@ -4,6 +4,7 @@ const config = require('./config.json')
 let savedWords = require('./words.json')
 const fsp = require('fs/promises')
 const grammarify = require('grammarify')
+cleanTextUtils = require('clean-text-utils')
 
 const client = new discord.Client({
     intents: [
@@ -53,7 +54,8 @@ client.on('messageCreate', async (message) => {
         reply += randomWord + " ";
     }
 
-    return message.reply(grammarify.clean(reply));
+    reply = grammarify.clean(cleanTextUtils.replace.smartChars(cleanTextUtils.replace.diacritics(grammarify.clean(reply))));
+    return message.reply(reply);
 });
 
 client.login(config.token)
