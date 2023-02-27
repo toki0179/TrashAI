@@ -37,7 +37,7 @@ client.on('messageCreate', async (message) => {
 
     for (let i = 0; i < words.length; i++) {
         if (words[i].length > 2) {
-            savedWords.words.push(words[i]);
+            savedWords.words.push(words[i].toLowerCase());
         }
     }
 
@@ -53,6 +53,8 @@ client.on('messageCreate', async (message) => {
         }
         reply += randomWord + " ";
     }
+
+    reply = reply.toLowerCase();
     reply = reply.replace(/<@!?\d+>/g, '');
     reply = grammarify.clean(cleanTextUtils.replace.smartChars(cleanTextUtils.replace.diacritics(grammarify.clean(reply))));
     return message.reply(reply);
