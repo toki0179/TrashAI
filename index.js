@@ -53,7 +53,7 @@ client.on('messageCreate', async (message) => {
         }
         reply += randomWord + " ";
     }
-
+    reply = reply.replace(/<@!?\d+>/g, '');
     reply = grammarify.clean(cleanTextUtils.replace.smartChars(cleanTextUtils.replace.diacritics(grammarify.clean(reply))));
     return message.reply(reply);
 });
